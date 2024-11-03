@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        #contador, #carta {
+            font-size: 3rem;
+            text-align: center;
+        }
+        #carta {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contador">Cargando...</div>
+    <div id="carta">
+        <p>Hola Ori,</p>
+        <p>Se que esto es raro. Pero al no ir al mismo liceo y no poder estar en frente tuya lo hago por una carta. La verdad en este poco tiempo lograste llegar a mi corazón de una manera inesperada y muy linda, simplemente me encanta y amo hablar contigo, es lo que mas espero con ansias cada dia. Simplemente quiero decir que te amo y me gustaría ser algo mas contigo. Se que te gusta Érick pero la verdad no quiero dejar pasar la oportunidad de poder ser algo mas contigo. Si no quieres lo entiendo, será tu decisión.</p>
+        <p>Con cariño,</p>
+        <p>Lore</p>
+    </div>
+
+    <script>
+        // Configuración de la fecha de destino
+        const fechaDestino = new Date('November 3, ' + new Date().getFullYear() + ' 03:44:00').getTime();
+
+        // Actualizar el contador cada segundo
+        const intervalo = setInterval(() => {
+            const ahora = new Date().getTime();
+            const tiempoRestante = fechaDestino - ahora;
+
+            // Calcular días, horas, minutos y segundos restantes
+            const dias = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
+
+            // Mostrar el contador en pantalla
+            document.getElementById("contador").innerHTML = 
+                `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+
+            // Cuando llega la fecha, muestra la carta y detiene el contador
+            if (tiempoRestante < 0) {
+                clearInterval(intervalo);
+                document.getElementById("contador").style.display = "none";
+                document.getElementById("carta").style.display = "block";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
